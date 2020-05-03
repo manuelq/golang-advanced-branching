@@ -111,7 +111,7 @@ func generateRating() {
 		var vehRating rating
 		for _, msg := range v.Feedback {
 			if text := strings.Split(msg, " "); len(text) >= 5 {
-				vehRating = 5
+				vehRating = 5.0
 				vehResult.feedbackTotal++
 				for _, word := range text {
 					switch s := strings.Trim(strings.ToLower(word), " ,.,!,?,\t,\n,\r"); s {
@@ -124,6 +124,14 @@ func generateRating() {
 					case "pathetic", "bad", "worse", "unfortunately", "agitated", "frustrated":
 						vehRating += extraNegative
 					}
+				}
+				switch {
+				case vehRating > 8.0:
+					vehResult.feedbackPositive++
+				case vehRating >= 4.0 && vehRating <= 8.0:
+					vehResult.feedbackNeutral++
+				case vehRating < 4.0:
+					vehResult.feedbackNegative++
 				}
 			}
 		}
