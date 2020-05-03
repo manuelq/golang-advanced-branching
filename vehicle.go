@@ -29,6 +29,14 @@ type Values struct {
 // Model array for the feedback.json file
 
 type Model struct {
+	Name string
+}
+
+type feedbackResult struct {
+	feedbackTotal    int
+	feedbackPositive int
+	feedbackNegative int
+	feedbackNeutral  int
 }
 
 type rating float32
